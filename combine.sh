@@ -6,12 +6,6 @@ title="Вопросы для подготовки"
 book="QA"
 
 # Создаем итоговый файл с заданным заголовком первого уровня
-#echo "---" > $filetmp
-#echo "title: "Вопросы для подготовки"" >> $filetmp
-#echo "author: "Константин Терских, kostus.online.1974@yandex.ru"" >> $filetmp
-#echo "---" >> $filetmp
-#echo "" >> $filetmp
-
 echo "# $title" > $filetmp
 
 # Явно задаем порядок и список файлов
@@ -23,6 +17,7 @@ files=(
   "Q-FunctionalInterfaces.md"
   "Q-StreamAPI.md"
   "Q-Collections.md"
+  "Q-ClassObject-EqualsAndHashCode.md"
 )
 
 # Обрабатываем каждый markdown-файл (кроме итогового)

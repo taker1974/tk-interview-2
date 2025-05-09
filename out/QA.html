@@ -855,5 +855,96 @@ storage</h3>
 </li>
 <li>Фиксированный размер: Предсказуемое использование памяти.</li>
 </ul>
+<h2 id="class-object.-equals-and-hashcode">Class Object. Equals and
+HashCode</h2>
+<h3 id="class-object">1. Class Object</h3>
+<p>Базовый класс всех объектов Java. Содержит методы:
+<code>equals()</code>, <code>hashCode()</code>, <code>toString()</code>,
+<code>clone()</code>, <code>finalize()</code>, <code>wait()</code>,
+<code>notify()</code>, <code>notifyAll()</code>.</p>
+<h3 id="equals-и-hashcode">2. Equals и HashCode</h3>
+<ul>
+<li><code>equals()</code>: Сравнение объектов на семантическое
+равенство.<br />
+</li>
+<li><code>hashCode()</code>: Генерация хэш-кода для использования в
+хэш-коллекциях (HashMap, HashSet).</li>
+</ul>
+<h3 id="контракт-между-equals-и-hashcode">3. Контракт между equals и
+hashCode</h3>
+<ul>
+<li>Если <code>a.equals(b) == true</code>, то
+<code>a.hashCode() == b.hashCode()</code>.<br />
+</li>
+<li>Обратное неверно: одинаковые хэши не гарантируют равенство
+объектов.</li>
+</ul>
+<h3 id="условия-переопределения-equals">4. Условия переопределения
+equals</h3>
+<ul>
+<li>Рефлексивность: <code>a.equals(a) == true</code>.<br />
+</li>
+<li>Симметричность: <code>a.equals(b) == b.equals(a)</code>.<br />
+</li>
+<li>Транзитивность: Если <code>a.equals(b)</code> и
+<code>b.equals(c)</code>, то <code>a.equals(c)</code>.<br />
+</li>
+<li>Консистентность: Результат не должен меняться между вызовами.<br />
+</li>
+<li>Неравенство с <code>null</code>:
+<code>a.equals(null) == false</code>.</li>
+</ul>
+<h3 id="если-не-переопределить-equalshashcode">5. Если не переопределить
+equals/hashCode</h3>
+<ul>
+<li><code>equals()</code> сравнивает ссылки (<code>==</code>).<br />
+</li>
+<li><code>hashCode()</code> возвращает адрес в памяти (не подходит для
+хэш-коллекций).</li>
+</ul>
+<h3 id="значения-без-переопределения">6. Значения без
+переопределения</h3>
+<ul>
+<li><code>new Object().equals(new Object()) → false</code>.<br />
+</li>
+<li><code>new Object().hashCode() ≠ new Object().hashCode()</code>.</li>
+</ul>
+<h3 id="симметричность-и-equals">7. Симметричность и
+<code>equals()</code></h3>
+<p>Симметричность нарушится, если в <code>equals()</code> участвуют
+разные классы. Пример:</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> A <span class="op">{</span> <span class="kw">...</span> <span class="op">}</span>  </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> B <span class="kw">extends</span> A <span class="op">{</span> <span class="kw">...</span> <span class="op">}</span>  </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>a<span class="op">.</span><span class="fu">equals</span><span class="op">(</span>b<span class="op">)</span> → <span class="kw">true</span><span class="op">,</span> но b<span class="op">.</span><span class="fu">equals</span><span class="op">(</span>a<span class="op">)</span> → <span class="kw">false</span><span class="op">.</span>  </span></code></pre></div>
+<h3 id="коллизия-hashcode">8. Коллизия hashCode</h3>
+<p>Разные объекты имеют одинаковый хэш. Решения:</p>
+<ul>
+<li>Хороший алгоритм хэширования.<br />
+</li>
+<li>В HashMap: связные списки/деревья в бакетах.</li>
+</ul>
+<h3 id="изменение-объекта-в-hash-коллекции">9. Изменение объекта в
+hash-коллекции</h3>
+<p>Если объект изменен после добавления в коллекцию, его хэш может не
+соответствовать бакету → коллекция становится некорректной.</p>
+<h3 id="instanceof-vs-getclass">10. <code>instanceof</code> vs
+<code>getClass()</code></h3>
+<ul>
+<li><code>instanceof</code>: Разрешает сравнение с подклассами (может
+нарушить симметричность).<br />
+</li>
+<li><code>getClass()</code>: Строгая проверка класса (гарантирует
+симметричность).</li>
+</ul>
+<h3 id="метод-clone">11. Метод clone()</h3>
+<p>Создает копию объекта. Требует:</p>
+<ul>
+<li>Реализации <code>Cloneable</code>.<br />
+</li>
+<li>Глубокого копирования (если объект содержит изменяемые поля).<br />
+</li>
+<li>Переопределения с <code>public</code> доступом.</li>
+</ul>
 </body>
 </html>
