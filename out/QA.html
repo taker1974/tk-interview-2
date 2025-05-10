@@ -946,5 +946,239 @@ hash-коллекции</h3>
 </li>
 <li>Переопределения с <code>public</code> доступом.</li>
 </ul>
+<h2 id="exceptions">Exceptions</h2>
+<h3 id="определение-исключения-exception">1. Определение исключения
+(exception)</h3>
+<p>Исключение — событие, прерывающее нормальный поток выполнения
+программы. Используется для обработки ошибок (ошибки ввода, деление на
+ноль, доступ к null).</p>
+<h3 id="особенности-trycatch">2. Особенности try…catch</h3>
+<ul>
+<li><code>try</code>: Блок с кодом, где может возникнуть
+исключение.<br />
+</li>
+<li><code>catch</code>: Ловит указанный тип исключения. Можно несколько
+<code>catch</code>.<br />
+</li>
+<li><code>finally</code>: Выполняется всегда (даже при исключении).</li>
+</ul>
+<h3 id="error-vs-exception">3. Error vs Exception</h3>
+<ul>
+<li>Error: Непроверяемые фатальные ошибки (OutOfMemoryError). Не
+обрабатываются.<br />
+</li>
+<li>Exception: Проверяемые/непроверяемые ошибки, которые можно
+обработать.</li>
+</ul>
+<h3 id="checked-vs-unchecked-throw-throws">4. Checked vs Unchecked,
+throw, throws</h3>
+<ul>
+<li>Checked: Наследники <code>Exception</code> (кроме RuntimeException).
+Требуют обработки.<br />
+</li>
+<li>Unchecked: Наследники <code>RuntimeException</code>.<br />
+</li>
+<li>throw: Выброс исключения
+(<code>throw new IOException()</code>).<br />
+</li>
+<li>throws: Объявление исключений в сигнатуре метода.</li>
+</ul>
+<h3 id="иерархия-исключений">5. Иерархия исключений</h3>
+<ul>
+<li><code>Throwable</code> → <code>Error</code> (необрабатываемые) и
+<code>Exception</code> (обрабатываемые).<br />
+</li>
+<li><code>Exception</code> → <code>RuntimeException</code> (unchecked) и
+другие (checked).</li>
+</ul>
+<h3 id="checked-и-unchecked-исключения">6. Checked и Unchecked
+исключения</h3>
+<ul>
+<li>Checked: Обязательны для обработки (try-catch/throws). Пример:
+<code>IOException</code>.<br />
+</li>
+<li>Unchecked: Не требуют обработки. Пример:
+<code>NullPointerException</code>.</li>
+</ul>
+<h3 id="проверка-checked-исключений">7. Проверка Checked исключений</h3>
+<p>Да. Компилятор требует их обработки или объявления в
+<code>throws</code>.</p>
+<h3 id="ключевое-слово-throws">8. Ключевое слово throws</h3>
+<p>Указывает, какие исключения метод может выбросить. Пример:</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> <span class="fu">readFile</span><span class="op">()</span> <span class="kw">throws</span> <span class="bu">IOException</span> <span class="op">{</span> <span class="kw">...</span> <span class="op">}</span>  </span></code></pre></div>
+<h3 id="способы-обработки-исключений">9. Способы обработки
+исключений</h3>
+<ul>
+<li><code>try-catch-finally</code>.<br />
+</li>
+<li>Проброс через <code>throws</code>.<br />
+</li>
+<li>Перехват в вызывающем коде.</li>
+</ul>
+<h3 id="правила-при-наследовании">10. Правила при наследовании</h3>
+<p>Переопределяемый метод не может объявлять более общие checked
+исключения, чем родительский.</p>
+<h3 id="оператор-throw">11. Оператор throw</h3>
+<p>Выбрасывает исключение:</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>x <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span> <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">IllegalArgumentException</span><span class="op">();</span>  </span></code></pre></div>
+<h3 id="метод-main-и-throws">12. Метод main и throws</h3>
+<p>Да, может. Исключение передается в JVM, которая завершает программу и
+печатает стектрейс.</p>
+<h2 id="память-в-java">Память в Java</h2>
+<h3 id="как-добиться-stackoverflowerror">1. Как добиться
+StackOverflowError</h3>
+<p>Бесконечная рекурсия:</p>
+<div class="sourceCode" id="cb16"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> <span class="fu">recursiveMethod</span><span class="op">()</span> <span class="op">{</span> <span class="fu">recursiveMethod</span><span class="op">();</span> <span class="op">}</span>  </span></code></pre></div>
+<p>Причина: Переполнение стека вызовов (ограниченная память под
+стек).</p>
+<h3 id="outofmemoryerror-1">2. OutOfMemoryError</h3>
+<ul>
+<li>Heap-память: Создание множества объектов без возможности удаления
+(например, бесконечный цикл с <code>new Object()</code>).<br />
+</li>
+<li>Metaspace/PermGen: Перегрузка классами (например, динамическая
+генерация классов).</li>
+</ul>
+<h3 id="garbage-collector-gc">3. Garbage Collector (GC)</h3>
+<p>Автоматически освобождает память от неиспользуемых объектов.<br />
+Зачем: Управление памятью, предотвращение утечек.</p>
+<h3 id="heap-vs-stack">4. Heap vs Stack</h3>
+<ul>
+<li>Heap: Область для хранения объектов (управляется GC).<br />
+</li>
+<li>Stack: Хранит локальные переменные, вызовы методов (примитивы,
+ссылки). Работает по LIFO.</li>
+</ul>
+<h3 id="пул-строк-string-pool">5. Пул строк (String Pool)</h3>
+<ul>
+<li>Специальная область в Heap для уникальных строковых литералов.<br />
+</li>
+<li>Как работает:
+<ul>
+<li>При создании через литерал (<code>"text"</code>): проверка наличия в
+пуле → возврат существующей строки.<br />
+</li>
+<li>При <code>new String("text")</code>: создается новый объект вне
+пула.<br />
+</li>
+</ul></li>
+<li>Цель: Оптимизация памяти за счет переиспользования строк.</li>
+</ul>
+<p>Пример:</p>
+<div class="sourceCode" id="cb17"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">String</span> s1 <span class="op">=</span> <span class="st">&quot;hello&quot;</span><span class="op">;</span>        <span class="co">// Пул  </span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="bu">String</span> s2 <span class="op">=</span> <span class="st">&quot;hello&quot;</span><span class="op">;</span>        <span class="co">// Существующий объект из пула  </span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="bu">String</span> s3 <span class="op">=</span> <span class="kw">new</span> <span class="bu">String</span><span class="op">(</span><span class="st">&quot;hello&quot;</span><span class="op">);</span> <span class="co">// Новый объект в Heap  </span></span></code></pre></div>
+<h2 id="многопоточность">Многопоточность</h2>
+<h3 id="процесс-и-поток">1. Процесс и поток</h3>
+<ul>
+<li>Процесс: Изолированный экземпляр программы с собственным адресным
+пространством.<br />
+</li>
+<li>Поток (Thread): Легковесная единица выполнения внутри процесса.
+Потоки разделяют память процесса.</li>
+</ul>
+<h3 id="многопоточность-в-java">2. Многопоточность в Java</h3>
+<ul>
+<li>Параллельное выполнение нескольких потоков для повышения
+производительности.<br />
+</li>
+<li>Зачем: Распараллеливание задач (обработка запросов, асинхронные
+операции).</li>
+</ul>
+<h3 id="создание-и-запуск-потока">3. Создание и запуск потока</h3>
+<ul>
+<li>Наследование от <code>Thread</code> и переопределение
+<code>run()</code>.<br />
+</li>
+<li>Реализация <code>Runnable</code>/<code>Callable</code> и передача в
+<code>Thread</code> или пул потоков.<br />
+</li>
+<li>Запуск: <code>thread.start()</code> (не <code>run()</code>!).</li>
+</ul>
+<h3 id="способы-синхронизации">4. Способы синхронизации</h3>
+<ul>
+<li><code>synchronized</code> блоки/методы.<br />
+</li>
+<li>Локи (<code>ReentrantLock</code>, <code>StampedLock</code>).<br />
+</li>
+<li>Атомарные классы (<code>AtomicInteger</code>,
+<code>AtomicReference</code>).<br />
+</li>
+<li><code>volatile</code> переменные.</li>
+</ul>
+<h3 id="проблемы-многопоточности">5. Проблемы многопоточности</h3>
+<ul>
+<li>Состояние гонки (Race Condition).<br />
+</li>
+<li>Дэдлоки (Deadlock).<br />
+</li>
+<li>Голодание (Starvation).<br />
+</li>
+<li>Инверсия приоритетов.</li>
+</ul>
+<h3 id="race-condition">6. Race Condition</h3>
+<ul>
+<li>Непредсказуемый результат из-за конкуренции потоков за ресурс.<br />
+</li>
+<li>Предотвращение: Синхронизация, атомарные операции, неизменяемые
+объекты.</li>
+</ul>
+<h3 id="deadlock">7. Deadlock</h3>
+<ul>
+<li>Взаимная блокировка потоков из-за ожидания ресурсов.<br />
+</li>
+<li>Избежание:
+<ul>
+<li>Упорядоченное получение локов.<br />
+</li>
+<li>Использование <code>tryLock()</code> с таймаутом.</li>
+</ul></li>
+</ul>
+<h3 id="классы-и-интерфейсы">8. Классы и интерфейсы</h3>
+<ul>
+<li><code>Thread</code>, <code>Runnable</code>, <code>Callable</code>,
+<code>Future</code>.<br />
+</li>
+<li><code>ExecutorService</code>, <code>ThreadPoolExecutor</code>,
+<code>ForkJoinPool</code>.<br />
+</li>
+<li><code>Lock</code>, <code>Semaphore</code>,
+<code>CountDownLatch</code>.</li>
+</ul>
+<h3 id="методы-синхронизации">9. Методы синхронизации</h3>
+<ul>
+<li><code>wait()</code>, <code>notify()</code>, <code>notifyAll()</code>
+(объекты мониторы).<br />
+</li>
+<li><code>Lock.lock()/unlock()</code>.<br />
+</li>
+<li><code>volatile</code> для видимости изменений между потоками.</li>
+</ul>
+<h3 id="пул-потоков-thread-pool">10. Пул потоков (Thread Pool)</h3>
+<ul>
+<li><p>Набор переиспользуемых потоков для выполнения задач.<br />
+</p></li>
+<li><p>Создание:</p>
+<div class="sourceCode" id="cb18"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">ExecutorService</span> pool <span class="op">=</span> <span class="bu">Executors</span><span class="op">.</span><span class="fu">newFixedThreadPool</span><span class="op">(</span><span class="dv">4</span><span class="op">);</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>pool<span class="op">.</span><span class="fu">submit</span><span class="op">(()</span> <span class="op">-&gt;</span> <span class="op">{</span> <span class="kw">...</span> <span class="op">});</span></span></code></pre></div></li>
+</ul>
+<h3 id="forkjoinpool">11. ForkJoinPool</h3>
+<ul>
+<li>Специализированный пул для рекурсивных задач (разделяй и
+властвуй).<br />
+</li>
+<li>Особенности:
+<ul>
+<li>Работает через <code>ForkJoinTask</code> (например,
+<code>RecursiveTask</code>).<br />
+</li>
+<li>Использует алгоритм “work-stealing” для балансировки нагрузки.</li>
+</ul></li>
+</ul>
 </body>
 </html>

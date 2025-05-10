@@ -18,6 +18,9 @@ files=(
   "Q-StreamAPI.md"
   "Q-Collections.md"
   "Q-ClassObject-EqualsAndHashCode.md"
+  "Q-Exceptions.md"
+  "Q-Memory.md"
+  "Q-Multithreading.md"
 )
 
 # Обрабатываем каждый markdown-файл (кроме итогового)
