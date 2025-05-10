@@ -21,6 +21,10 @@ files=(
   "Q-Exceptions.md"
   "Q-Memory.md"
   "Q-Multithreading.md"
+  "Q-Databases.md"
+  "Q-Spring.md"
+  "Q-SpringBoot.md"
+  "Q-SpringData.md"
 )
 
 # Обрабатываем каждый markdown-файл (кроме итогового)

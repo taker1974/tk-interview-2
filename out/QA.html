@@ -1180,5 +1180,338 @@ class="sourceCode java"><code class="sourceCode java"><span id="cb18-1"><a href=
 <li>Использует алгоритм “work-stealing” для балансировки нагрузки.</li>
 </ul></li>
 </ul>
+<h2 id="базы-данных">Базы данных</h2>
+<h3 id="агрегатные-операторы">1. Агрегатные операторы</h3>
+<p>Функции для вычисления над набором значений, возвращающие одно
+значение. Примеры:</p>
+<ul>
+<li><code>SUM()</code>: Сумма.<br />
+</li>
+<li><code>AVG()</code>: Среднее.<br />
+</li>
+<li><code>COUNT()</code>: Количество строк.<br />
+</li>
+<li><code>MIN()</code>/<code>MAX()</code>: Минимум/максимум.</li>
+</ul>
+<h3 id="нормальные-формы-нф">2. Нормальные формы (НФ)</h3>
+<p>Правила проектирования БД для минимизации избыточности:</p>
+<ul>
+<li>1НФ: Атомарные значения в ячейках.<br />
+</li>
+<li>2НФ: Нет частичных зависимостей (ключ определяет все поля).<br />
+</li>
+<li>3НФ: Нет транзитивных зависимостей.<br />
+</li>
+<li>BCNF: Усиленная 3НФ.</li>
+</ul>
+<h3 id="индексы">3. Индексы</h3>
+<p>Структуры для ускорения поиска. Типы:</p>
+<ul>
+<li>B-дерево: Для диапазонных запросов (основа — сбалансированное
+дерево).<br />
+</li>
+<li>Хэш-индекс: Точечный поиск (ключ → хэш).<br />
+</li>
+<li>Составной индекс: По нескольким столбцам.</li>
+</ul>
+<h3 id="where-vs-having">4. <code>WHERE</code> vs
+<code>HAVING</code></h3>
+<ul>
+<li><code>WHERE</code>: Фильтрация строк до группировки
+(<code>GROUP BY</code>).<br />
+</li>
+<li><code>HAVING</code>: Фильтрация после группировки (работает с
+агрегатами).</li>
+</ul>
+<h3 id="join">5. <code>JOIN</code></h3>
+<p>Объединение таблиц по условию. Типы:</p>
+<ul>
+<li><code>INNER JOIN</code>: Только совпадающие строки.<br />
+</li>
+<li><code>LEFT/RIGHT JOIN</code>: Все строки левой/правой таблицы +
+совпадения.<br />
+</li>
+<li><code>FULL JOIN</code>: Все строки обеих таблиц.<br />
+</li>
+<li><code>CROSS JOIN</code>: Декартово произведение.</li>
+</ul>
+<h3 id="основные-типы-данных-sql">6. Основные типы данных SQL</h3>
+<ul>
+<li>Числовые: <code>INT</code>, <code>DECIMAL</code>,
+<code>FLOAT</code>.<br />
+</li>
+<li>Строковые: <code>VARCHAR</code>, <code>TEXT</code>.<br />
+</li>
+<li>Дата/время: <code>DATE</code>, <code>TIMESTAMP</code>.<br />
+</li>
+<li>Логический: <code>BOOLEAN</code>.<br />
+</li>
+<li>Бинарные: <code>BLOB</code>.</li>
+</ul>
+<h3 id="первичный-ключ-primary-key">7. Первичный ключ (Primary Key)</h3>
+<ul>
+<li>Уникальный идентификатор строки.<br />
+</li>
+<li>Не может быть <code>NULL</code>.<br />
+</li>
+<li>Гарантирует уникальность и целостность данных.<br />
+</li>
+<li>Пример: <code>id INT PRIMARY KEY</code>.</li>
+</ul>
+<h2 id="spring">Spring</h2>
+<h3 id="spring-framework-и-преимущества">1. Spring Framework и
+преимущества</h3>
+<p>Платформа для разработки enterprise-приложений.<br />
+Преимущества:</p>
+<ul>
+<li>Инверсия управления (IoC) и внедрение зависимостей (DI).<br />
+</li>
+<li>Модульность (Spring MVC, Data, Security, Boot).<br />
+</li>
+<li>Упрощение интеграции (JPA, Hibernate, Kafka).<br />
+</li>
+<li>Сокращение шаблонного кода.</li>
+</ul>
+<h3 id="модули-spring">2. Модули Spring</h3>
+<ul>
+<li>Core: IoC, DI.<br />
+</li>
+<li>MVC: Веб-приложения.<br />
+</li>
+<li>Data: Работа с БД (JPA, JDBC).<br />
+</li>
+<li>Security: Аутентификация/авторизация.<br />
+</li>
+<li>Boot: Быстрый старт приложений.<br />
+</li>
+<li>Cloud: Микросервисы.</li>
+</ul>
+<h3 id="ioc-и-di">3. IoC и DI</h3>
+<ul>
+<li>IoC: Контейнер управляет жизненным циклом объектов.<br />
+</li>
+<li>DI: Зависимости передаются объектам извне (через конструктор,
+сеттеры, аннотации).<br />
+</li>
+<li>Пример: <code>@Autowired</code> для автоматического связывания.</li>
+</ul>
+<h3 id="spring-bean">4. Spring Bean</h3>
+<p>Объект, управляемый Spring-контейнером.<br />
+Создание:</p>
+<ul>
+<li>Аннотации (<code>@Component</code>, <code>@Service</code>,
+<code>@Controller</code>).<br />
+</li>
+<li>XML (<code>&lt;bean&gt;</code>).<br />
+</li>
+<li>Java-конфигурация (<code>@Bean</code> в
+<code>@Configuration</code>).</li>
+</ul>
+<h3 id="жизненный-цикл-бина">5. Жизненный цикл бина</h3>
+<ol type="1">
+<li>Создание экземпляра.<br />
+</li>
+<li>Внедрение зависимостей.<br />
+</li>
+<li>Инициализация (<code>@PostConstruct</code>).<br />
+</li>
+<li>Использование.<br />
+</li>
+<li>Уничтожение (<code>@PreDestroy</code>).</li>
+</ol>
+<h3 id="скоупы-бинов">6. Скоупы бинов</h3>
+<ul>
+<li>Singleton: Один экземпляр на контейнер (по умолчанию).<br />
+</li>
+<li>Prototype: Новый экземпляр при каждом запросе.<br />
+</li>
+<li>Request/Session/Application: Для веб-приложений.</li>
+</ul>
+<h3 id="qualifier-и-primary">7. <span class="citation"
+data-cites="Qualifier">@Qualifier</span> и <span class="citation"
+data-cites="Primary">@Primary</span></h3>
+<ul>
+<li><span class="citation" data-cites="Qualifier">@Qualifier</span>:
+Указывает конкретный бин при неоднозначности (например,
+<code>@Qualifier("beanName")</code>).<br />
+</li>
+<li><span class="citation" data-cites="Primary">@Primary</span>:
+Определяет бин по умолчанию при наличии нескольких реализаций.</li>
+</ul>
+<h3 id="проблемы-и-решения">8. Проблемы и решения</h3>
+<ul>
+<li>Циклические зависимости: Использовать <code>@Lazy</code> или
+конструктор без зависимостей.<br />
+</li>
+<li>Производительность: Оптимизировать конфигурацию, использовать
+профили (<code>@Profile</code>).<br />
+</li>
+<li>Сложность конфигурации: Переход на Spring Boot с
+автонастройкой.</li>
+</ul>
+<h2 id="spring-boot">Spring Boot</h2>
+<h3 id="spring-boot-и-его-преимущества">1. Spring Boot и его
+преимущества</h3>
+<ul>
+<li>Фреймворк для быстрого создания Spring-приложений с минимальной
+конфигурацией.<br />
+</li>
+<li>Преимущества:
+<ul>
+<li>Автоконфигурация (автоматическая настройка бинов).<br />
+</li>
+<li>Встроенные серверы (Tomcat, Jetty).<br />
+</li>
+<li>Стартер-зависимости (<code>spring-boot-starter-*</code>).<br />
+</li>
+<li>Готовые решения для метрик, мониторинга (Actuator).</li>
+</ul></li>
+</ul>
+<h3 id="разница-между-spring-и-spring-boot">2. Разница между Spring и
+Spring Boot</h3>
+<ul>
+<li>Spring: Базовый фреймворк с ручной настройкой (XML,
+аннотации).<br />
+</li>
+<li>Spring Boot: Надстройка над Spring с «умными» дефолтами и
+автоматизацией конфигурации.</li>
+</ul>
+<h3 id="service-component-repository">3. <span class="citation"
+data-cites="Service">@Service</span>, <span class="citation"
+data-cites="Component">@Component</span>, <span class="citation"
+data-cites="Repository">@Repository</span></h3>
+<ul>
+<li><span class="citation" data-cites="Component">@Component</span>:
+Общая аннотация для любых бинов.<br />
+</li>
+<li><span class="citation" data-cites="Service">@Service</span>:
+Специализация для бизнес-логики.<br />
+</li>
+<li><span class="citation" data-cites="Repository">@Repository</span>:
+Для DAO-слоя (добавляет обработку SQL-исключений).</li>
+</ul>
+<h3 id="аннотации-spring-mvc">4. Аннотации Spring MVC</h3>
+<ul>
+<li><span class="citation" data-cites="Controller">@Controller</span>:
+Определяет класс как MVC-контроллер.<br />
+</li>
+<li><span class="citation"
+data-cites="RequestMapping">@RequestMapping</span>, <span
+class="citation" data-cites="GetMapping">@GetMapping</span>, <span
+class="citation" data-cites="PostMapping">@PostMapping</span>: Маппинг
+URL.<br />
+</li>
+<li><span class="citation"
+data-cites="RequestParam">@RequestParam</span>, <span class="citation"
+data-cites="PathVariable">@PathVariable</span>: Извлечение параметров
+запроса.<br />
+</li>
+<li><span class="citation"
+data-cites="ResponseBody">@ResponseBody</span>: Возврат данных вместо
+представления.</li>
+</ul>
+<h3 id="аннотация-value">5. Аннотация <span class="citation"
+data-cites="Value">@Value</span></h3>
+<p>Инъекция значений из properties-файлов или переменных
+окружения.<br />
+Пример:</p>
+<div class="sourceCode" id="cb19"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="at">@Value</span><span class="op">(</span><span class="st">&quot;${app.name}&quot;</span><span class="op">)</span>  </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="kw">private</span> <span class="bu">String</span> appName<span class="op">;</span>  </span></code></pre></div>
+<h3 id="spring-boot-starter">6. Spring Boot Starter</h3>
+<p>Готовые наборы зависимостей для конкретных задач (например,
+<code>spring-boot-starter-web</code> включает Tomcat, Spring MVC).<br />
+Использование: Добавить в <code>pom.xml</code> или
+<code>build.gradle</code>.</p>
+<h3 id="управление-конфигурацией">7. Управление конфигурацией</h3>
+<ul>
+<li><code>application.properties</code>/<code>application.yml</code>:
+Основные настройки.<br />
+</li>
+<li>Профили (<code>@Profile</code>): Конфигурации для разных сред (dev,
+prod).<br />
+</li>
+<li><code>@ConfigurationProperties</code>: Привязка свойств к
+Java-классам.</li>
+</ul>
+<h3 id="инструменты-разработки-и-тестирования">8. Инструменты разработки
+и тестирования</h3>
+<ul>
+<li>DevTools: Hot reload, автоматический перезапуск.<br />
+</li>
+<li>Actuator: Эндпоинты для мониторинга (/health, /metrics).<br />
+</li>
+<li>Тестирование:
+<ul>
+<li><code>@SpringBootTest</code> для интеграционных тестов.<br />
+</li>
+<li><code>@WebMvcTest</code> для тестирования контроллеров.<br />
+</li>
+<li><code>TestRestTemplate</code> для HTTP-запросов.</li>
+</ul></li>
+</ul>
+<h2 id="spring-data">Spring Data</h2>
+<h3 id="репозиторий-в-spring-data">1. Репозиторий в Spring Data</h3>
+<p>Интерфейс для доступа к данным (CRUD-операции). Примеры:</p>
+<ul>
+<li><code>CrudRepository</code>: Базовые операции (save, findById,
+delete).<br />
+</li>
+<li><code>JpaRepository</code>: Расширенный API (пагинация,
+сортировка).</li>
+</ul>
+<p>Использование:</p>
+<div class="sourceCode" id="cb20"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">public</span> <span class="kw">interface</span> UserRepository <span class="kw">extends</span> JpaRepository<span class="op">&lt;</span>User<span class="op">,</span> <span class="bu">Long</span><span class="op">&gt;</span> <span class="op">{</span> <span class="kw">...</span> <span class="op">}</span>  </span></code></pre></div>
+<h3 id="подключение-к-бд">2. Подключение к БД</h3>
+<ul>
+<li><p>Добавить зависимость (напр.,
+<code>spring-boot-starter-data-jpa</code>).<br />
+</p></li>
+<li><p>Настроить <code>application.properties</code>:</p>
+<pre class="properties"><code>spring.datasource.url=jdbc:postgresql://localhost:5432/db  
+spring.datasource.username=user  
+spring.datasource.password=pass  </code></pre></li>
+</ul>
+<h3 id="требования-к-entity-классу">3. Требования к Entity-классу</h3>
+<ul>
+<li>Аннотация <code>@Entity</code>.<br />
+</li>
+<li>Поле с <code>@Id</code> (первичный ключ).<br />
+</li>
+<li>Конструктор без аргументов (по умолчанию).<br />
+</li>
+<li>Геттеры/сеттеры для полей (опционально).</li>
+</ul>
+<h3 id="аннотация-query">4. Аннотация <code>@Query</code></h3>
+<p>Позволяет задать кастомный JPQL/SQL-запрос:</p>
+<div class="sourceCode" id="cb22"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="at">@Query</span><span class="op">(</span><span class="st">&quot;SELECT u FROM User u WHERE u.active = true&quot;</span><span class="op">)</span>  </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="bu">List</span><span class="op">&lt;</span>User<span class="op">&gt;</span> <span class="fu">findActiveUsers</span><span class="op">();</span>  </span></code></pre></div>
+<h3 id="фетч-стратегии">5. Фетч-стратегии</h3>
+<p>Определяют, когда загружать связанные сущности:</p>
+<ul>
+<li>EAGER: Немедленная загрузка (может привести к N+1).<br />
+</li>
+<li>LAZY: Ленивая загрузка (по умолчанию для <code>@ManyToMany</code>,
+<code>@OneToMany</code>).</li>
+</ul>
+<h3 id="проблема-n1">6. Проблема N+1</h3>
+<p>Суть: При загрузке N сущностей выполняется N+1 запрос (1 для
+основного списка + N для связанных данных).<br />
+Пример:</p>
+<div class="sourceCode" id="cb23"><pre
+class="sourceCode sql"><code class="sourceCode sql"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> users;        <span class="co">-- 1 запрос  </span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> orders <span class="kw">WHERE</span> user_id <span class="op">=</span> <span class="dv">1</span>;  </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> orders <span class="kw">WHERE</span> user_id <span class="op">=</span> <span class="dv">2</span>;  </span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="op">..</span>.  </span></code></pre></div>
+<p>Решение:</p>
+<ul>
+<li><p>Использовать <code>JOIN FETCH</code> в JPQL:</p>
+<div class="sourceCode" id="cb24"><pre
+class="sourceCode java"><code class="sourceCode java"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="at">@Query</span><span class="op">(</span><span class="st">&quot;SELECT u FROM User u JOIN FETCH u.orders&quot;</span><span class="op">)</span>  </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="bu">List</span><span class="op">&lt;</span>User<span class="op">&gt;</span> <span class="fu">findAllWithOrders</span><span class="op">();</span>  </span></code></pre></div></li>
+<li><p>Настройка <code>@EntityGraph</code> для загрузки связей.</p></li>
+</ul>
 </body>
 </html>
